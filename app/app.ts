@@ -1,58 +1,23 @@
 /// <reference path="player.ts" />
+/// <reference path="game.ts" />
 
-function startGame(){
-    //starting a new game
-    
-    let playerName: string | undefined = getInputValue('playername');
-    logPlayer(playerName);
+let newGame: Game;
 
-    postScore(80, playerName);
-    postScore(-5, playerName);
-}
+// add click handler to the start game button
+document.getElementById('startGame')!.addEventListener('click', () => {
+  const player: Player = new Player();
+  player.name = Utility.getInputValue('playername');
 
-function logPlayer(name : string = 'MulitMath player') : void {
-    console.log(`New game starting for player: ${name}`);
-}
+  const problemCount: number = Number(Utility.getInputValue('problemCount'));
+  const factor: number = Number(Utility.getInputValue('factor'));
 
-function getInputValue(elementID: string): string | undefined {
-    const inputElement: HTMLInputElement = <HTMLInputElement>document.getElementById(elementID);
+  newGame = new Game(player, problemCount, factor);
+  newGame.displayGame();
+});
 
-    if(inputElement.value === ''){
-        return undefined;
-    }
-    else{
-        return inputElement.value;
-    }
-}
+// add click handler to the calculate score button
+document.getElementById('calculate')!.addEventListener('click', () => {
+  newGame.calculateScore();
+});
 
-function postScore(score: number, playerName: string ='MultiMath Player'): void {
-    
-    //logger tar in vilken function som helst som tar in en string och returnar void.
-    let logger: (value: string) => void;
-
-    if(score < 0){
-        logger = logError; 
-    }
-    else{
-        logger= logMessage;
-    }
-    
-    const scoreElement: HTMLElement | null = document.getElementById('postedScores');
-    scoreElement!.innerText = `${score} - ${playerName}`;
-
-    logger(`Score: ${score}`);
-}
-
-document.getElementById('startGame')?.addEventListener('click', startGame);
-
-//Arrow functions are anonymous
-const logMessage =  (message: string) => console.log(message);
-
-function logError(err: string): void {
-    console.error(err);
-}
-
-const firstPlayer: Player = new Player();
-firstPlayer.name = 'Lanier';
-console.log(firstPlayer);
 
