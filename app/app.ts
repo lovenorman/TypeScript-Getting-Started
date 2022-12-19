@@ -1,3 +1,5 @@
+/// <reference path="player.ts" />
+
 function startGame(){
     //starting a new game
     
@@ -50,16 +52,7 @@ function logError(err: string): void {
     console.error(err);
 }
 
-let myResult: Result = {
-    playerName: 'Marie',
-    score: 5,
-    problemCount: 5,
-    factor: 7
-};
-
-let player: Person = {
-    name: 'Daniel',
-    formatName: () => 'Dan'
-
-};
+const firstPlayer: Player = new Player();
+firstPlayer.name = 'Lanier';
+console.log(firstPlayer);
 
