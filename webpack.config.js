@@ -1,6 +1,6 @@
 module.exports = {
-  entry: './app/app.ts',
-  devtool: 'inline-source-map',
+  entry: './js/app.js',
+  // devtool: 'inline-source-map',
   mode: 'development',
   module: {
     rules: [
